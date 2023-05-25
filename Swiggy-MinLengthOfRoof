@@ -1,0 +1,39 @@
+/* SWIGGY-
+Problem Statement 4: There are n cars parked in the parking lot and you want to cover k cars by building a roof over them. 
+What’s the minimum length of the roof that would cover k cars?
+We are given the slots for each car.
+
+~ Simply sort the array and find the subarray of k length having the minimum difference
+*/
+
+import java.util.*;
+
+public class MyClass {
+    static int minRoof(int arr[], int k) {
+        int n = arr.length;
+        if(k>n) return -1;
+        
+        Arrays.sort(arr);
+        int roofLen = Integer.MAX_VALUE;
+        
+        int low = 0;
+        int high = k-1;
+        while(high<n) {
+            int currLen = arr[high]-arr[low];
+            roofLen = Math.min(roofLen,currLen);
+            
+            low++;
+            high++;
+        }
+        return roofLen+1;
+    }
+    
+    public static void main(String args[]) {
+      int arr[] = {2,10,8,4,17};
+        // int arr[] = {1,4,9,10};
+        int k = 3;
+          
+        int roofLen = minRoof(arr,k);
+        System.out.print(roofLen);
+    }
+}
